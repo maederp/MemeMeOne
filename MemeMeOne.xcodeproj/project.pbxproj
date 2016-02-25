@@ -13,6 +13,7 @@
 		D05C99971C75063200FFD771 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D05C99961C75063200FFD771 /* Assets.xcassets */; };
 		D05C999A1C75063200FFD771 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D05C99981C75063200FFD771 /* LaunchScreen.storyboard */; };
 		D05C99A21C75A81600FFD771 /* MemeMeTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C99A11C75A81600FFD771 /* MemeMeTextFieldDelegate.swift */; };
+		D05C99A41C7EDEA700FFD771 /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05C99A31C7EDEA700FFD771 /* Meme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		D05C99991C75063200FFD771 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D05C999B1C75063200FFD771 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D05C99A11C75A81600FFD771 /* MemeMeTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeMeTextFieldDelegate.swift; sourceTree = "<group>"; };
+		D05C99A31C7EDEA700FFD771 /* Meme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				D05C99981C75063200FFD771 /* LaunchScreen.storyboard */,
 				D05C999B1C75063200FFD771 /* Info.plist */,
 				D05C99A11C75A81600FFD771 /* MemeMeTextFieldDelegate.swift */,
+				D05C99A31C7EDEA700FFD771 /* Meme.swift */,
 			);
 			path = MemeMeOne;
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D05C99921C75063200FFD771 /* ViewController.swift in Sources */,
+				D05C99A41C7EDEA700FFD771 /* Meme.swift in Sources */,
 				D05C99A21C75A81600FFD771 /* MemeMeTextFieldDelegate.swift in Sources */,
 				D05C99901C75063200FFD771 /* AppDelegate.swift in Sources */,
 			);

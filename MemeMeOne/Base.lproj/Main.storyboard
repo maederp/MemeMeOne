@@ -21,19 +21,19 @@
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
-                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="30" translatesAutoresizingMaskIntoConstraints="NO" id="Agv-Ph-HWR">
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" minimumFontSize="30" translatesAutoresizingMaskIntoConstraints="NO" id="Agv-Ph-HWR">
                                 <rect key="frame" x="0.0" y="90" width="600" height="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
-                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VPx-Ob-rp4">
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VPx-Ob-rp4">
                                 <rect key="frame" x="0.0" y="500" width="600" height="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
-                            <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aKm-7l-PhE">
+                            <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aKm-7l-PhE">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
                                     <barButtonItem systemItem="action" id="9Il-op-YHX">
@@ -49,8 +49,11 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="boD-ny-C6M">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="boD-ny-C6M">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="M64-Dz-WJx"/>
+                                </constraints>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="mnt-YK-ucG"/>
                                     <barButtonItem title="Album" width="120" style="plain" id="P8J-k1-NyW">
@@ -71,23 +74,30 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="boD-ny-C6M" secondAttribute="bottom" id="4bR-xb-xn9"/>
-                            <constraint firstItem="lPv-Wa-mpk" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="5v2-XL-Eog"/>
                             <constraint firstItem="lPv-Wa-mpk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="8h9-eF-YBT"/>
                             <constraint firstItem="VPx-Ob-rp4" firstAttribute="leading" secondItem="lPv-Wa-mpk" secondAttribute="leading" id="AvK-6R-vDQ"/>
                             <constraint firstAttribute="trailing" secondItem="lPv-Wa-mpk" secondAttribute="trailing" id="CFT-V0-6dK"/>
                             <constraint firstItem="Agv-Ph-HWR" firstAttribute="trailing" secondItem="lPv-Wa-mpk" secondAttribute="trailing" id="CiO-bf-0xO"/>
                             <constraint firstAttribute="bottom" secondItem="lPv-Wa-mpk" secondAttribute="bottom" id="EFj-ri-gCt"/>
+                            <constraint firstItem="aKm-7l-PhE" firstAttribute="top" secondItem="lPv-Wa-mpk" secondAttribute="top" id="HMv-aG-6tZ"/>
                             <constraint firstItem="aKm-7l-PhE" firstAttribute="leading" secondItem="lPv-Wa-mpk" secondAttribute="leading" id="M6g-uq-c9m"/>
-                            <constraint firstItem="aKm-7l-PhE" firstAttribute="top" secondItem="lPv-Wa-mpk" secondAttribute="top" id="OKs-QB-8FX"/>
                             <constraint firstItem="aKm-7l-PhE" firstAttribute="trailing" secondItem="lPv-Wa-mpk" secondAttribute="trailing" id="QFA-rv-xHO"/>
+                            <constraint firstItem="boD-ny-C6M" firstAttribute="top" secondItem="lPv-Wa-mpk" secondAttribute="bottom" constant="-44" id="YGu-mc-bQp"/>
                             <constraint firstItem="VPx-Ob-rp4" firstAttribute="trailing" secondItem="lPv-Wa-mpk" secondAttribute="trailing" id="d5x-yE-xAH"/>
                             <constraint firstItem="lPv-Wa-mpk" firstAttribute="top" secondItem="Agv-Ph-HWR" secondAttribute="bottom" constant="-100" id="guC-FP-IsF"/>
+                            <constraint firstItem="lPv-Wa-mpk" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="hD9-Or-76e"/>
                             <constraint firstItem="boD-ny-C6M" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="hYf-fj-e2S"/>
                             <constraint firstItem="Agv-Ph-HWR" firstAttribute="leading" secondItem="lPv-Wa-mpk" secondAttribute="leading" id="oQL-Tp-VTF"/>
-                            <constraint firstAttribute="trailing" secondItem="aKm-7l-PhE" secondAttribute="trailing" id="oVy-sw-zLu"/>
+                            <constraint firstItem="aKm-7l-PhE" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="qdG-5m-gCK"/>
                             <constraint firstItem="VPx-Ob-rp4" firstAttribute="top" secondItem="lPv-Wa-mpk" secondAttribute="bottom" constant="-100" id="u17-ac-Chs"/>
                             <constraint firstAttribute="trailing" secondItem="boD-ny-C6M" secondAttribute="trailing" id="vRs-hP-5Nc"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="qdG-5m-gCK"/>
+                                <exclude reference="EFj-ri-gCt"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="bottomTextField" destination="VPx-Ob-rp4" id="ykO-aK-NEQ"/>

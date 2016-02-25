@@ -8,13 +8,6 @@
 
 import UIKit
 
-struct Meme {
-    var topText : String
-    var bottomText: String
-    
-    let originalImage : UIImage
-    var memeImage: UIImage
-}
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -50,9 +43,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     //View Lifecycle functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        topTextField.delegate = memeMeTFDelegate
-        bottomTextField.delegate = memeMeTFDelegate
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -64,16 +54,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         subscribeToKeyboardNotifications()
         
         //configure topTextField
-        topTextField.defaultTextAttributes = memeTextAttributes
-        topTextField.autocapitalizationType = UITextAutocapitalizationType.AllCharacters
-        topTextField.adjustsFontSizeToFitWidth = true
-        topTextField.textAlignment = NSTextAlignment.Center
+        configureTextField(topTextField)
         
         //configure bottomTextField
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.autocapitalizationType = UITextAutocapitalizationType.AllCharacters
-        bottomTextField.adjustsFontSizeToFitWidth = true
-        bottomTextField.textAlignment = NSTextAlignment.Center
+        configureTextField(bottomTextField)
+        
+        topTextField.delegate = memeMeTFDelegate
+        bottomTextField.delegate = memeMeTFDelegate
+        
+        //prefill Default Text Values into Text Fields
+        prefillTextFieldsWithDefault()
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -84,11 +74,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     //Cancel Button related Source code
     @IBAction func topBarCancelPressed(sender: AnyObject) {
         //reset Text Fields and top Bar
-        topTextField.hidden = true
-        topTextField.text = "TOP"
+        textFieldsToBeHidden(true)
         
-        bottomTextField.hidden = true
-        bottomTextField.text = "BOTTOM"
+        prefillTextFieldsWithDefault()
+        
         topToolBar.hidden = true
         
         imageView.image = nil
@@ -98,16 +87,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     //Image Picker related source code
     @IBAction func pickImageFromAlbum(sender: AnyObject) {
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        pickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        presentViewController(pickerController, animated: true, completion: nil)
+        pickImageFromSourceType(UIImagePickerControllerSourceType.PhotoLibrary)
     }
 
     @IBAction func pickImageFromCamera(sender: AnyObject) {
+        pickImageFromSourceType(UIImagePickerControllerSourceType.Camera)
+    }
+    
+    func pickImageFromSourceType(source: UIImagePickerControllerSourceType){
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
-        pickerController.sourceType = UIImagePickerControllerSourceType.Camera
+        pickerController.sourceType = source
         presentViewController(pickerController, animated: true, completion: nil)
     }
     
@@ -115,12 +105,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{
             imageView.image = image
-            topTextField.hidden = false
-            bottomTextField.hidden = false
+            textFieldsToBeHidden(false)
             topToolBar.hidden = false
         } else{
-            topTextField.hidden = true
-            bottomTextField.hidden = true
+            textFieldsToBeHidden(true)
             topToolBar.hidden = true
         }
         
@@ -140,26 +128,33 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         let activityController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil )
         
-        presentViewController(activityController, animated: true, completion: { UIImageWriteToSavedPhotosAlbum(meme.memeImage, nil, nil, nil) } )
+        
+        presentViewController(activityController, animated: true, completion: nil )
+        
+        //using completion with Items Handler to save image only if action is not cancelled
+        activityController.completionWithItemsHandler = {(activityType, completed:Bool, returnedItems:[AnyObject]?, error: NSError?) in
+            
+            if (!completed){
+                return
+            }
+            UIImageWriteToSavedPhotosAlbum(meme.memeImage, nil, nil, nil)
+        }
     }
     
     func generateMemedImage() -> UIImage
     {
         //hide unnecessary toolbars
-        self.topToolBar.hidden = true
-        self.bottomToolBar.hidden = true
+        toolbarsToBeHidden(true)
         
         // Render view to an image
-        UIGraphicsBeginImageContext(self.imageView.frame.size)
-        imageView.drawViewHierarchyInRect(self.imageView.frame,
-            afterScreenUpdates: true)
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.drawViewHierarchyInRect(imageView.frame, afterScreenUpdates: true)
         let memedImage : UIImage =
         UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         //unhide unnecessary toolbars
-        self.topToolBar.hidden = false
-        self.bottomToolBar.hidden = false
+        toolbarsToBeHidden(false)
         
         return memedImage
     }
@@ -183,10 +178,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     func keyboardWillHide(notification: NSNotification){
-        //Keyboard must shift view back ONLY if bottom Text field is editing
-        if bottomTextField.editing {
-            view.frame.origin.y += getKeyboardHeight(notification)
-        }
+        //Shift entire view back to bottom after Keyboard hide
+        view.frame.origin.y = 0
     }
     
     func getKeyboardHeight(notification: NSNotification) -> CGFloat{
@@ -194,5 +187,28 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
         return keyboardSize.CGRectValue().height
     }
+    
+    func configureTextField(textField: UITextField){
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.autocapitalizationType = UITextAutocapitalizationType.AllCharacters
+        textField.adjustsFontSizeToFitWidth = true
+        textField.textAlignment = NSTextAlignment.Center
+    }
+    
+    func prefillTextFieldsWithDefault(){
+        topTextField.text = "TOP"
+        bottomTextField.text = "BOTTOM"
+    }
+    
+    func toolbarsToBeHidden(visible: Bool){
+        topToolBar.hidden = visible
+        bottomToolBar.hidden = visible
+    }
+    
+    func textFieldsToBeHidden(visible: Bool){
+        topTextField.hidden = visible
+        bottomTextField.hidden = visible
+    }
+    
 }
 
