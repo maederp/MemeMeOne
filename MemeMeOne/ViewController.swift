@@ -71,6 +71,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         unsubscribeFromKeyboardNotifications()
     }
     
+    
     //Cancel Button related Source code
     @IBAction func topBarCancelPressed(sender: AnyObject) {
         //reset Text Fields and top Bar
@@ -173,7 +174,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func keyboardWillShow(notification: NSNotification){
         //Keyboard must shift view ONLY if bottom Text field is editing
         if bottomTextField.editing {
-            view.frame.origin.y -= getKeyboardHeight(notification)
+            view.frame.origin.y = getKeyboardHeight(notification) * -1
         }
     }
 
@@ -210,5 +211,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         bottomTextField.hidden = visible
     }
     
+    // status bar should be hidden
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
 }
 
